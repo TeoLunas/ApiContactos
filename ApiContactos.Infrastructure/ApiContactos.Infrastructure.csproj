@@ -28,4 +28,8 @@
     <ProjectReference Include="..\ApiContactos.Application\ApiContactos.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Queries\Country\" />
+  </ItemGroup>
+
 </Project>
