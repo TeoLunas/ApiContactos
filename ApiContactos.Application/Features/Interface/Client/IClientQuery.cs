@@ -9,6 +9,7 @@ namespace ApiContactos.Application.Features.Interface.Client
 {
     public interface IClientQuery
     {
-        Task<ResponseData<IEnumerable<ClientResponse>>> GetAllClients();
+        Task<ResponseData<PagedResponse<IEnumerable<ClientResponse>>>> GetAllClients(int pageNumber, int pageSize);
+
     }
 }

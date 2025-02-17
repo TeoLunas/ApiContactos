@@ -1,4 +1,5 @@
 ﻿using ApiContactos.Application.Features.Interface.Client;
+using ApiContactos.Application.Models.Response;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiContactos.API.Controllers
@@ -27,10 +28,10 @@ namespace ApiContactos.API.Controllers
         }
 
         [HttpGet("GetAllContacs")]
-        public async Task<bool> GetAllContacs ()
+        public async Task<ResponseData<PagedResponse<IEnumerable<ClientResponse>>>> GetAllContacs([FromQuery] int page, [FromQuery] int size)
         {
-            var clients = await _clientQuery.GetAllClients();
-            return true;
+            var clients = await _clientQuery.GetAllClients(page, size);
+            return clients;
         }
 
     }

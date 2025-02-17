@@ -27,15 +27,56 @@ namespace ApiContactos.Infrastructure.Queries.Client
             _logger = logger;
         }
 
-        public async Task<ResponseData<IEnumerable<ClientResponse>>> GetAllClients()
+        public async Task<ResponseData<PagedResponse<IEnumerable<ClientResponse>>>> GetAllClients(int pageNumber, int pageSize)
         {
-            //_logger.LogInformation("Obteniendo todos los clientes");
+            try
+            {
+                var totalClients = await _dbContext.Clients.CountAsync();
 
-            var clients = await _dbContext.Clients.ToListAsync();
+                var skip = (pageNumber - 1) * pageSize;
 
-            //_logger.LogInformation($"Se encontraron {clients.Count} clientes");
+                var clients = await _dbContext.Clients
+                    .Skip(skip)
+                    .Take(pageSize)
+                    .ToListAsync();
 
-            return new ResponseData<IEnumerable<ClientResponse>> { Descripcion = "Lista de contactos", Resultado = (IEnumerable<ClientResponse>)clients, Exitoso = true };
+                var clientResponses = clients.Select(c => new ClientResponse
+                {
+                    ClientId = c.ClientID,
+                    FirstName = c.FirstName,
+                    LastName = c.LastName,
+                    Phone = c.Phone,
+                    Email = c.Email,
+                    CountryID = c.CountryID
+                }).ToList();
+
+                var totalPages = (int)Math.Ceiling((double)totalClients / pageSize);
+
+                var pagedResponse = new PagedResponse<IEnumerable<ClientResponse>>
+                {
+                    Data = clientResponses,
+                    PageNumber = pageNumber,
+                    PageSize = pageSize,
+                    TotalRecords = totalClients,
+                    TotalPages = totalPages
+                };
+                
+                return new ResponseData<PagedResponse<IEnumerable<ClientResponse>>>
+                {
+                    Descripcion = "Lista de contactos paginada",
+                    Resultado = pagedResponse,
+                    Exitoso = true
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ResponseData<PagedResponse<IEnumerable<ClientResponse>>>
+                {
+                    Descripcion = "Error al obtener los clientes: " + ex.Message,
+                    Resultado = null,
+                    Exitoso = false
+                };
+            }
         }
     }
 }
