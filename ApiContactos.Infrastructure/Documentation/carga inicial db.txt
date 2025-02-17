@@ -1,0 +1,50 @@
+CREATE TABLE Country (
+    CountryID INT PRIMARY KEY IDENTITY(1,1),
+    Name NVARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Client (
+    ClientID INT PRIMARY KEY IDENTITY(1,1),
+    FirstName NVARCHAR(100) NOT NULL,
+    LastName NVARCHAR(100) NOT NULL,
+    Phone NVARCHAR(20) NOT NULL,
+    Email NVARCHAR(100),
+    CountryID INT,
+    FOREIGN KEY (CountryID) REFERENCES Country(CountryID)
+);
+
+
+INSERT INTO Country (Name) VALUES ('Chile');
+INSERT INTO Country (Name) VALUES ('Argentina');
+INSERT INTO Country (Name) VALUES ('Brasil');
+INSERT INTO Country (Name) VALUES ('México');
+INSERT INTO Country (Name) VALUES ('España');
+INSERT INTO Country (Name) VALUES ('Estados Unidos');
+INSERT INTO Country (Name) VALUES ('Canadá');
+INSERT INTO Country (Name) VALUES ('Francia');
+INSERT INTO Country (Name) VALUES ('Alemania');
+INSERT INTO Country (Name) VALUES ('Italia');
+
+INSERT INTO Client (firstName, LastName, Phone, Email, CountryID) VALUES ('Juan', 'Perez', '56912345678', 'juan.perez@example.com', 1);
+INSERT INTO Client (FirstName, LastName, Phone, Email, CountryID) VALUES ('Maria', 'Gomez', '56987654321', 'maria.gomez@example.com', 2);
+INSERT INTO Client (FirstName, LastName, Phone, Email, CountryID) VALUES ('Carlos', 'Silva', '56956781234', 'carlos.silva@example.com', 3);
+INSERT INTO Client (FirstName, LastName, Phone, Email, CountryID) VALUES ('Ana', 'Martinez', '56943218765', 'ana.martinez@example.com', 4);
+INSERT INTO Client (FirstName, LastName, Phone, Email, CountryID) VALUES ('Luis', 'Rodriguez', '56965432187', 'luis.rodriguez@example.com', 5);
+INSERT INTO Client (FirstName, LastName, Phone, Email, CountryID) VALUES ('Laura', 'Lopez', '56998765432', 'laura.lopez@example.com', 6);
+INSERT INTO Client (FirstName, LastName, Phone, Email, CountryID) VALUES ('Pedro', 'Gonzalez', '56912348765', 'pedro.gonzalez@example.com', 7);
+INSERT INTO Client (FirstName, LastName, Phone, Email, CountryID) VALUES ('Sofia', 'Fernandez', '56987651234', 'sofia.fernandez@example.com', 8);
+INSERT INTO Client (FirstName, LastName, Phone, Email, CountryID) VALUES ('Diego', 'Ramirez', '56956784321', 'diego.ramirez@example.com', 9);
+INSERT INTO Client (FirstName, LastName, Phone, Email, CountryID) VALUES ('Carmen', 'Torres', '56943215678', 'carmen.torres@example.com', 10);
+INSERT INTO Client (FirstName, LastName, Phone, Email, CountryID) VALUES ('Ricardo', 'Vargas', '56965437812', 'ricardo.vargas@example.com', 1);
+INSERT INTO Client (FirstName, LastName, Phone, Email, CountryID) VALUES ('Elena', 'Castro', '56998762134', 'elena.castro@example.com', 2);
+INSERT INTO Client (FirstName, LastName, Phone, Email, CountryID) VALUES ('Oscar', 'Mendez', '56912346578', 'oscar.mendez@example.com', 3);
+INSERT INTO Client (FirstName, LastName, Phone, Email, CountryID) VALUES ('Patricia', 'Rojas', '56987653412', 'patricia.rojas@example.com', 4);
+INSERT INTO Client (FirstName, LastName, Phone, Email, CountryID) VALUES ('Fernando', 'Diaz', '56956782134', 'fernando.diaz@example.com', 5);
+INSERT INTO Client (FirstName, LastName, Phone, Email, CountryID) VALUES ('Gabriela', 'Ortega', '56943216587', 'gabriela.ortega@example.com', 6);
+INSERT INTO Client (FirstName, LastName, Phone, Email, CountryID) VALUES ('Hector', 'Navarro', '56965431278', 'hector.navarro@example.com', 7);
+INSERT INTO Client (FirstName, LastName, Phone, Email, CountryID) VALUES ('Isabel', 'Morales', '56998764532', 'isabel.morales@example.com', 8);
+INSERT INTO Client (FirstName, LastName, Phone, Email, CountryID) VALUES ('Jorge', 'Jimenez', '56912347856', 'jorge.jimenez@example.com', 9);
+INSERT INTO Client (FirstName, LastName, Phone, Email, CountryID) VALUES ('Lucia', 'Herrera', '56987654321', 'lucia.herrera@example.com', 10);
+
+Select * from Client;
+Select * from Country;

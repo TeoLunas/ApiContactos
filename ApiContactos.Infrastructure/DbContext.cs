@@ -35,7 +35,7 @@ namespace ApiContactos.Infrastructure
                 entity.HasKey(e => e.ClientID); 
                 entity.ToTable("Client");
                 entity.Property(e => e.ClientID).HasColumnName("ClientID");
-                entity.Property(e => e.FirstName).HasColumnName("firstName").IsRequired().HasMaxLength(100);
+                entity.Property(e => e.FirstName).HasColumnName("FirstName").IsRequired().HasMaxLength(100);
                 entity.Property(e => e.LastName).HasColumnName("LastName").IsRequired().HasMaxLength(100);
                 entity.Property(e => e.Phone).HasColumnName("Phone").IsRequired().HasMaxLength(20);
                 entity.Property(e => e.Email).HasColumnName("Email").HasMaxLength(100);

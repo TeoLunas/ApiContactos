@@ -16,17 +16,17 @@ builder.Services.AddInfrastructureServices(builder.Configuration);
 // Add CORS services
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAllOrigins",
+    options.AddPolicy("AllowSpecificOrigin",
         builder =>
         {
-            builder.AllowAnyOrigin()
-                   .AllowAnyMethod()
-                   .AllowAnyHeader();
+            builder.WithOrigins("http://localhost:4200") // Permite solo este origen
+                   .AllowAnyMethod() // Permite cualquier método HTTP (GET, POST, etc.)
+                   .AllowAnyHeader(); // Permite cualquier encabezado
         });
 });
 
 var app = builder.Build();
-
+app.UseCors("AllowSpecificOrigin");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
